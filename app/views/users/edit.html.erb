@@ -4,6 +4,7 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @user, local: true) do |f|%>
+      <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :name %>
       <%= f.text_field :name, class: "form-control" %>
       
@@ -19,7 +20,7 @@
       <%= f.submit "Save Changes", class: "btn btn-primary" %>
     <% end %>
     
-    <div class="gravtr-edit">
+    <div class="gravtar-edit">
       <%= gravatar_for @user %>
       <a href="https://gravatar.com/emails" target="_blank">Change</a>
     </div>

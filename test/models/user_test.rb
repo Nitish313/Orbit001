@@ -60,5 +60,13 @@ class UserTest < ActiveSupport::TestCase
     @user.password = @user.password_confirmation = "p" * 5
     assert_not @user.valid?
   end
+  
+  test "snapshots be destroyed if the user is destroyed" do
+    @user.save
+    @user.snapshots.create(content: "Test content")
+    assert_difference 'Snapshot.count', -1 do
+      @user.destroy
+    end
+  end
     
 end
