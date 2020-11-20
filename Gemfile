@@ -17,6 +17,7 @@ gem 'webpacker',        '4.0.7'
 gem 'turbolinks',       '5.2.0'
 gem 'jbuilder',         '2.9.1'
 gem 'bootsnap',         '1.4.4', require: false
+gem 'wdm', '>= 0.1.0' if Gem.win_platform?
 
 group :development, :test do
   gem 'sqlite3',        '1.4.1'
@@ -42,7 +43,7 @@ group :test do
 end
 
 group :production do
-  gem 'pg',              '1.1.4'
+  gem 'pg'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
