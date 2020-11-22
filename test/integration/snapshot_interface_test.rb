@@ -2,7 +2,7 @@ require 'test_helper'
 
 class SnapshotInterfaceTest < ActionDispatch::IntegrationTest
   def setup 
-    @user = users(:jane)
+    @user = users(:tony)
   end
   
   test "snapshot interface" do
@@ -17,8 +17,9 @@ class SnapshotInterfaceTest < ActionDispatch::IntegrationTest
     assert_select 'a[href=?]', '/?page=2' #correct pagination link
      
     #valid submission
+    content = "Great demo today"
     assert_difference 'Snapshot.count', 1 do
-      post snapshots_path, params: {snapshot: {content: 'Test content'}}
+      post snapshots_path, params: {snapshot: {content: content}}
     end
     assert_redirected_to root_url
     follow_redirect!
@@ -31,7 +32,7 @@ class SnapshotInterfaceTest < ActionDispatch::IntegrationTest
       delete snapshot_path(first_snapshot)
     end
     #Visit different user (no delete links)
-    get user_path(user(:tony))
-    assert_select 'a', 'delete', count:0
+    get user_path(users(:jane))
+    assert_select 'a', text: 'delete', count: 0
   end
 end
